@@ -2,13 +2,13 @@ package draftengine.drafter
 
 import draftengine.model.draft.DraftBoard
 import draftengine.model.player.Player
-import draftengine.service.{CachedPlayerService, DraftFileBasedService}
+import draftengine.service.{SimpleCachedPlayerService, DraftFileBasedService}
 
 import scala.io.StdIn.readLine
 
 object ConsoleBasedDrafter {
 
-  private val playerService = new CachedPlayerService()
+  private val playerService = new SimpleCachedPlayerService()
   private val draftService = new DraftFileBasedService(playerService, ".")
 
   def main(args: Array[String]): Unit = {

@@ -48,4 +48,6 @@ object PositionSet {
 
   def apply(pos: String): PositionSet = PositionSet(pos.split(" ").map(Position.apply).toSet)
 
+  def empty = PositionSet(Set.empty[Position])
+
 }

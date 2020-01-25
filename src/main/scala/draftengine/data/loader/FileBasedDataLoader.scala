@@ -9,7 +9,8 @@ import org.apache.poi.ss.usermodel.{DataFormatter, Row, WorkbookFactory}
 import scala.collection.JavaConverters._
 import scala.util.Try
 
-object FileBasedDataLoader {
+@deprecated("move to more generic API", "")
+class FileBasedDataLoader {
 
   private val spreadsheetFile = "C:\\Users\\kcopp\\Dropbox\\Documents\\Fantasy\\Fantasy Baseball\\Fantasy Baseball 2020\\Spreadsheet.xlsx"
   private val dataFormatter = new DataFormatter()
@@ -41,12 +42,20 @@ object FileBasedDataLoader {
     val playerId = getString(row, 2)
     val positionSet = PositionSet(getString(row, 1))
     val projectedPoints = Try(getString(row, 4).toInt).getOrElse(0)
-    val playerProjection = PlayerProjection(playerId, projectedPoints)
+    val playerProjection = PlayerProjection(playerId, null, null)
     (playerName, playerProjection, positionSet)
   }
 
   def getString(row: Row, index: Int): String = {
     dataFormatter.formatCellValue(row.getCell(index))
+  }
+
+}
+
+object FileBasedDataLoader {
+
+  def main(args: Array[String]): Unit = {
+    new FileBasedDataLoader().load2020Projections()
   }
 
 }

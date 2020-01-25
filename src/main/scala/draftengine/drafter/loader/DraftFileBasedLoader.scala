@@ -1,7 +1,7 @@
 package draftengine.drafter.loader
 
 import draftengine.model.draft.{Draft, DraftBoard, DraftPick, FantasyTeam}
-import draftengine.service.{CachedPlayerService, PlayerService}
+import draftengine.service.{SimpleCachedPlayerService, PlayerService}
 
 import scala.io.Source
 
@@ -73,7 +73,7 @@ class DraftFileBasedLoader(
 object DraftFileBasedLoader {
 
   def main(args: Array[String]): Unit = {
-    new DraftFileBasedLoader("1", new CachedPlayerService(), ".").loadDraft().show()
+    new DraftFileBasedLoader("1", new SimpleCachedPlayerService(), ".").loadDraft().show()
   }
 
 }

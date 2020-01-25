@@ -2,7 +2,7 @@ package draftengine.drafter
 
 import draftengine.data.loader.DataCreator
 import draftengine.model.draft.{Draft, DraftBoard, StandardDraftRules}
-import draftengine.service.CachedPlayerService
+import draftengine.service.SimpleCachedPlayerService
 
 object SimpleDrafter {
 
@@ -15,7 +15,7 @@ object SimpleDrafter {
     val teams = DataCreator.createDummyTeams1()
     val draft = Draft("1", "Draft 1", teams, 10)
     val draftPicks = StandardDraftRules(draft).getDraftPicks()
-    val draftBoard = DraftBoard(draft, draftPicks.toArray, new CachedPlayerService())
+    val draftBoard = DraftBoard(draft, draftPicks.toArray, new SimpleCachedPlayerService())
     draftBoard.select("8700")
     draftBoard.select("3137")
     draftBoard.select("10155")

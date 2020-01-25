@@ -12,7 +12,7 @@ trait PlayerService {
 
 }
 
-class CachedPlayerService extends PlayerService {
+class SimpleCachedPlayerService extends PlayerService {
 
   private lazy val (playerCacheById, playerCacheByName) = loadPlayerCache()
 
@@ -21,7 +21,7 @@ class CachedPlayerService extends PlayerService {
   }
 
   override def getPlayerByName(name: String): Option[Player] = {
-    val searchKey = CachedPlayerService.cleanseNameString(name)
+    val searchKey = SimpleCachedPlayerService.cleanseNameString(name)
     playerCacheByName.get(searchKey) match {
       case Some(players) if players.size > 1 => { System.err.println("Too many matching players"); None }
       case Some(players) => players.headOption
@@ -30,18 +30,18 @@ class CachedPlayerService extends PlayerService {
   }
 
   private def loadPlayerCache(): (Map[String, Player], Map[String, Seq[Player]]) = {
-    val playerData = FileBasedDataLoader.load2020ProjectionsSpreadsheet()
-    val playerCacheById = CachedPlayerService.buildPlayerCacheById(playerData)
-    val playerCacheByName = CachedPlayerService.buildPlayerCacheByName(playerData, playerCacheById)
+    val playerData = new FileBasedDataLoader().load2020ProjectionsSpreadsheet()
+    val playerCacheById = SimpleCachedPlayerService.buildPlayerCacheById(playerData)
+    val playerCacheByName = SimpleCachedPlayerService.buildPlayerCacheByName(playerData, playerCacheById)
     (playerCacheById, playerCacheByName)
   }
 
 }
 
-object CachedPlayerService {
+object SimpleCachedPlayerService {
 
   def main(args: Array[String]): Unit = {
-    System.err.println(new CachedPlayerService().getPlayer("8700"))
+    System.err.println(new SimpleCachedPlayerService().getPlayer("8700"))
   }
 
   def buildPlayerCacheById(playerData: Seq[(String, PlayerProjection, PositionSet)]): Map[String, Player] = {
@@ -56,7 +56,7 @@ object CachedPlayerService {
 
     playerData.map {
       case (name, projection, _) => {
-        val cleansedName = CachedPlayerService.cleanseNameString(name).toLowerCase
+        val cleansedName = SimpleCachedPlayerService.cleanseNameString(name).toLowerCase
         cleansedName -> playerCacheById(projection.playerId)
       }
     }.groupBy {

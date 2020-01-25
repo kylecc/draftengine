@@ -68,6 +68,7 @@ object DataCreator {
   }
 
   def createPlayerProjections1(): Seq[PlayerProjection] = {
+    null/*
     Seq(
       PlayerProjection("1", 500),
       PlayerProjection("2", 501),
@@ -94,7 +95,7 @@ object DataCreator {
       PlayerProjection("23", 498),
       PlayerProjection("24", 372),
       PlayerProjection("25", 461)
-    )
+    )*/
   }
 
 }

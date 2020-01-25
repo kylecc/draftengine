@@ -24,7 +24,7 @@ class TopProjectedPlayersAtEachPositionAnalyzer(val data: Seq[(String, PlayerPro
 object TopProjectedPlayersAtEachPositionAnalyzer {
 
   def main(args: Array[String]): Unit = {
-    val data2020 = FileBasedDataLoader.load2020ProjectionsSpreadsheet()
+    val data2020 = new FileBasedDataLoader().load2020ProjectionsSpreadsheet()
     new TopProjectedPlayersAtEachPositionAnalyzer(data2020).analyze()
   }
 

@@ -1,3 +1,5 @@
 package draftengine.model.player
 
-case class PlayerProjection(playerId: String, points: Int)
+import draftengine.model.statistics.Statistics
+
+case class PlayerProjection(playerId: String, sourceId: String, statistics: Statistics)

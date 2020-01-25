@@ -4,7 +4,7 @@ import java.io.PrintWriter
 
 import draftengine.drafter.loader.DraftFileBasedLoader
 import draftengine.model.draft.DraftBoard
-import draftengine.service.CachedPlayerService
+import draftengine.service.SimpleCachedPlayerService
 
 class DraftFileBasedWriter(
   val draftId: String,
@@ -67,7 +67,7 @@ object DraftFileBasedWriter {
 
   def main(args: Array[String]): Unit = {
     val draftFileDirectory = "."
-    val draftBoard1 = new DraftFileBasedLoader("2", new CachedPlayerService(), draftFileDirectory).loadDraft()
+    val draftBoard1 = new DraftFileBasedLoader("2", new SimpleCachedPlayerService(), draftFileDirectory).loadDraft()
     val draftBoard2 = draftBoard1.copy(draft = draftBoard1.draft.copy(id = "3"))
     new DraftFileBasedWriter("3", draftBoard2, draftFileDirectory).writeDraft()
   }
