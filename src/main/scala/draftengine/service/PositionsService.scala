@@ -1,6 +1,7 @@
 package draftengine.service
 
-import draftengine.data.loader.{ProjectionsDataFromExcelFileLoader, ProjectionsDataPlayerPositionsLoader}
+import draftengine.data.loader.projections.ProjectionsDataFromExcelFileLoader
+import draftengine.data.loader.projections.mapper.ProjectionsDataPlayerPositionsLoader
 import draftengine.model.player.{PlayerPositionSet, PositionSet}
 
 trait PositionsService {
