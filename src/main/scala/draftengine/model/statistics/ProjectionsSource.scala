@@ -8,5 +8,6 @@ object ProjectionsSource {
   val STEAMER = "2"
   val DEPTH_CHARTS = "3"
   val ZIPS = "4"
+  val ATC = "5"
 
 }

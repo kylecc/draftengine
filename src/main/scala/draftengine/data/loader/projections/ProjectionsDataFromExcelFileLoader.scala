@@ -2,7 +2,6 @@ package draftengine.data.loader.projections
 
 import java.io.File
 
-import draftengine.data.loader.ProjectionsDataLoader
 import draftengine.data.loader.projections.mapper.ProjectionsDataRowMapper
 import org.apache.poi.ss.usermodel.{DataFormatter, Row, WorkbookFactory}
 

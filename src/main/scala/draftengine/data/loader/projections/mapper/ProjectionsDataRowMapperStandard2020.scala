@@ -5,7 +5,7 @@ import draftengine.model.player.PlayerProjection
 import draftengine.model.statistics.{ProjectionsSource, SeasonStatistics, Statistic, Statistics}
 import org.apache.commons.lang3.StringUtils
 
-class ProjectionsDataRowMapperSteamer2020 extends ProjectionsDataFileBasedRowMapper[String, PlayerProjection] {
+class ProjectionsDataRowMapperStandard2020 extends ProjectionsDataFileBasedRowMapper[String, PlayerProjection] {
 
   private val year = 2020
   private val playerIdColumnName = "playerid"
@@ -36,9 +36,9 @@ class ProjectionsDataRowMapperSteamer2020 extends ProjectionsDataFileBasedRowMap
     val games = getString(row, "G").toInt
     val rbcPointsPerGame = rbcPoints.toDouble / games
     val stats = Seq(
-      Statistic(Statistic.GAMES_PLAYED, games),
-      Statistic(Statistic.ROC_BOI_CO_POINTS, rbcPoints),
-      Statistic(Statistic.ROC_BOI_CO_PER_GAME, rbcPointsPerGame))
+      Statistic(Statistic.GamesPlayed, games),
+      Statistic(Statistic.RocBoiCoPoints, rbcPoints),
+      Statistic(Statistic.RocBoiCoPointsPerGame, rbcPointsPerGame))
     SeasonStatistics(year, stats)
   }
 
@@ -48,11 +48,11 @@ class ProjectionsDataRowMapperSteamer2020 extends ProjectionsDataFileBasedRowMap
 
 }
 
-object ProjectionsDataRowMapperSteamer2020 {
+object ProjectionsDataRowMapperStandard2020 {
 
   def main(args: Array[String]): Unit = {
     val steamer2020FileName = "C:\\Users\\kcopp\\Dropbox\\Documents\\Fantasy\\Fantasy Baseball\\Fantasy Baseball 2020\\Steamer 2020 projections as of Jan 19 2020 - do not edit.csv"
-    val rowMapper = new ProjectionsDataRowMapperSteamer2020()
+    val rowMapper = new ProjectionsDataRowMapperStandard2020()
     val projections = new ProjectionsDataFromCSVFileLoader(2020, steamer2020FileName, rowMapper).load()
     projections.foreach(System.err.println)
   }

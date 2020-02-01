@@ -40,6 +40,8 @@ case class PositionSet(positions: Set[Position]) {
 
   def isOutfield: Boolean = positions.exists(Position.isOutfield)
 
+  def isEmpty: Boolean = positions.isEmpty
+
 }
 
 object PositionSet {
@@ -47,6 +49,10 @@ object PositionSet {
   def apply(pos: Position.Value*): PositionSet = PositionSet(pos.toSet)
 
   def apply(pos: String): PositionSet = PositionSet(pos.split(" ").map(Position.apply).toSet)
+
+  def cornerInfield: PositionSet = PositionSet(Position.FirstBase, Position.ThirdBase)
+
+  def middleInfield: PositionSet = PositionSet(Position.SecondBase, Position.Shortstop)
 
   def empty = PositionSet(Set.empty[Position])
 

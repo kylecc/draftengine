@@ -2,12 +2,15 @@ package draftengine.data.loader.projections.mapper
 
 import draftengine.model.player.PlayerProjection
 import draftengine.model.statistics.{ProjectionsSource, SeasonStatistics, Statistic}
+import draftengine.service.positions.PositionsService
 import org.apache.commons.lang3.StringUtils
 import org.apache.poi.ss.usermodel.Row
 
 import scala.util.Try
 
-class ProjectionsDataRowMapperKyleRocBoiCo2020 extends ProjectionsDataFileBasedRowMapper[Row, PlayerProjection] {
+class ProjectionsDataRowMapperKyleRocBoiCo2020(
+  val positionsService: PositionsService)
+  extends ProjectionsDataFileBasedRowMapper[Row, PlayerProjection] {
 
   private val year = 2020
   private val playerIdColumnName = "playerid"
@@ -20,7 +23,7 @@ class ProjectionsDataRowMapperKyleRocBoiCo2020 extends ProjectionsDataFileBasedR
     } else {
       val playerId = getString(row, playerIdColumnName)
       val projectedPoints = Try(getString(row, rbc2020ProjectedPointsColumnName).toInt).getOrElse(0)
-      val rocBoiCoProjection = Statistic(Statistic.ROC_BOI_CO_POINTS, projectedPoints)
+      val rocBoiCoProjection = Statistic(Statistic.RocBoiCoPoints, projectedPoints)
       val projection = SeasonStatistics(year, Seq(rocBoiCoProjection))
       Some(PlayerProjection(playerId, projectionsSource, projection))
     }

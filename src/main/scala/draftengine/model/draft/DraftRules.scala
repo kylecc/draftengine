@@ -11,8 +11,8 @@ case class SnakeDraftRules(draft: Draft) extends DraftRules {
   override def getDraftPicks(): Seq[DraftPick] = {
     val evens = draft.teams
     val odds = draft.teams.reverse
-    (0 until draft.playersPerTeam).flatMap { i =>
-      i % 2 match {
+    (0 until draft.playersPerTeam).flatMap {
+      _ % 2 match {
         case 0 => DraftRules.createDraftPicks(evens)
         case _ => DraftRules.createDraftPicks(odds)
       }

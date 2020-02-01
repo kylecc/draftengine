@@ -4,18 +4,18 @@ object Position extends Enumeration {
 
   type Position = Value
 
-  val StartingPitcher = Value("SP")
-  val ReliefPitcher = Value("RP")
-  val Catcher = Value("C")
-  val FirstBase = Value("1B")
-  val SecondBase = Value("2B")
-  val ThirdBase = Value("3B")
-  val Shortstop = Value("SS")
-  val LeftField = Value("LF")
-  val CenterField = Value("CF")
-  val RightField = Value("RF")
-  val Outfield = Value("OF")
-  val designatedHitter = Value("DH")
+  val StartingPitcher: Position = Value("SP")
+  val ReliefPitcher: Position = Value("RP")
+  val Catcher: Position = Value("C")
+  val FirstBase: Position = Value("1B")
+  val SecondBase: Position = Value("2B")
+  val ThirdBase: Position = Value("3B")
+  val Shortstop: Position = Value("SS")
+  val LeftField: Position = Value("LF")
+  val CenterField: Position = Value("CF")
+  val RightField: Position = Value("RF")
+  val Outfield: Position = Value("OF")
+  val designatedHitter: Position = Value("DH")
 
   def isStartingPitcher(position: Value): Boolean = position match {
     case Position.StartingPitcher => true
