@@ -11,8 +11,7 @@ class SimpleCalculationEngine[T](
   extends CalculationEngine[T] {
 
   override def calculate(): Seq[CalculationOutputComponent[T]] = {
-    val calculationOutputs = performCalculations()
-    calculationOutputs.map {
+    performCalculations().map {
       case (playerId, playerOutputs) => CalculationOutputComponent(playerId, playerOutputs)
     }.toSeq
   }
@@ -26,7 +25,7 @@ class SimpleCalculationEngine[T](
 
   private def getCalculationsForAllPlayers(
     playersAndInputs: Seq[(Player, CalculationInputComponent[T])],
-    calculations: Seq[Calculation[T]]) = {
+    calculations: Seq[Calculation[T]]): Map[String, Map[String, T]] = {
 
     playersAndInputs.map {
       case (player, playerInputs) => {

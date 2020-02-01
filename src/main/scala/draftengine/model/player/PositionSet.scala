@@ -42,6 +42,10 @@ case class PositionSet(positions: Set[Position]) {
 
   def isEmpty: Boolean = positions.isEmpty
 
+  def isEligibleAt(other: PositionSet): Boolean = {
+    positions.intersect(other.positions).nonEmpty
+  }
+
 }
 
 object PositionSet {

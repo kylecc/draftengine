@@ -8,12 +8,14 @@ import draftengine.model.statistics.Statistic
 // TODO: probably make this modeling more sophisticated
 case class LeagueRules(
   leagueRulesId: String,
+  numberOfTeams: Int,
   statisticsPointsMap: Map[String, Double],
   numberOfPositionsMap: Map[PositionSet, Int])
 
 object LeagueRules {
 
   private lazy val idCounter = new AtomicInteger()
+  private val numberOfTeams2020 = 12
 
   import Position._
   import Statistic._
@@ -21,7 +23,7 @@ object LeagueRules {
   def getRocBoiCoPointsRules(): LeagueRules = {
     val statsPointsMap = buildRocBoiCoStatsPointsMap()
     val numberOfPositionsMap = buildRocBoiCoNumberOfPositionsMap()
-    LeagueRules(idCounter.incrementAndGet().toString, statsPointsMap, numberOfPositionsMap)
+    LeagueRules(idCounter.incrementAndGet().toString, numberOfTeams2020, statsPointsMap, numberOfPositionsMap)
   }
 
   private def buildRocBoiCoStatsPointsMap(): Map[String, Double] = {

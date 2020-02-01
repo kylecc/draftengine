@@ -8,7 +8,7 @@ import draftengine.service.positions.{PositionsService, SimplePositionsService}
 import org.apache.poi.ss.usermodel.Row
 
 class AggregatingProjectionsCachedFileBasedService(
-  val projectionLoaders: Seq[(String, ProjectionsDataLoader[_, PlayerProjection])])
+  private val projectionLoaders: Seq[(String, ProjectionsDataLoader[_, PlayerProjection])])
   extends ProjectionsService {
 
   private lazy val playerProjections = getPlayerProjections()
@@ -17,6 +17,10 @@ class AggregatingProjectionsCachedFileBasedService(
   override def getPlayerProjections(playerId: String): Seq[PlayerProjection] = {
     val aggregatedProjection = new ProjectionOutputsCalculator(playerId, year, playerProjections).calculate()
     Seq(aggregatedProjection)
+  }
+
+  override def getAllPlayerProjections(sourceId: String): Seq[PlayerProjection] = {
+    playerProjections.get(sourceId).getOrElse(Map.empty).values.toSeq
   }
 
   private def getPlayerProjections(): Map[String, Map[String, PlayerProjection]] = {
@@ -28,6 +32,7 @@ class AggregatingProjectionsCachedFileBasedService(
 
 }
 
+@deprecated // ???
 class ProjectionOutputsCalculator(
   val playerId: String,
   val year: Int,

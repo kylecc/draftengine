@@ -44,6 +44,7 @@ object Statistic {
 
   val RocBoiCoPoints = "200"
   val RocBoiCoPointsPerGame = "201"
+  val RocBoiCoPointsAboveReplacement = "202"
 
   val Composite = "1000"
 
